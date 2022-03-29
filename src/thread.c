@@ -6,20 +6,19 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/29 16:46:14 by swautele         ###   ########.fr       */
+/*   Updated: 2022/03/29 17:35:46 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	create_thread(t_param param, struct timeval start)
+int	create_thread(t_param param)
 {
 	int				i;
 	pthread_mutex_t	*fork;
 	pthread_t		*philo;
 	t_param			*info;
 
-	(void)start;
 	fork = malloc(sizeof(pthread_mutex_t) * param.number);
 	philo = malloc(sizeof(pthread_t) * param.number);
 	info = malloc(sizeof(t_param) * param.number);
@@ -28,6 +27,11 @@ int	create_thread(t_param param, struct timeval start)
 	{
 		*(info + i) = param;
 		(info + i)->pos = i;
+		if (i > 0)
+			(info + i)->lfork = fork + i - 1;
+		else
+			(info + i)->lfork = fork + param.number - 1;
+		(info + i)->rfork = fork + i;
 		pthread_mutex_init(fork + i, NULL);
 		pthread_create(philo + i, NULL, &philo_routine, info + i);
 	}

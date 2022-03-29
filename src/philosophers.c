@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:18:23 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/29 15:38:07 by swautele         ###   ########.fr       */
+/*   Updated: 2022/03/29 17:21:25 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int argc, char **argv)
 {
 	t_param			param;
-	struct timeval	start;
 
 	if (argc < 5 || argc > 6)
 	{
@@ -28,8 +27,7 @@ int	main(int argc, char **argv)
 		printf("Error\nParameter invalid\n");
 		return (2);
 	}
-	gettimeofday(&start, NULL);
-	printf("start tvsec = %ld start usec = %d\n", start.tv_sec, start.tv_usec);
+	gettimeofday(&param.start, NULL);
 	printf("param.number = %d	param death = %d	param eat = %d	param sleep = %d\n", param.number, param.death, param.eat, param.sleep);
-	create_thread(param, start);
+	create_thread(param);
 }

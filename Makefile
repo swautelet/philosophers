@@ -6,7 +6,7 @@
 #    By: swautele <swautele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 14:48:19 by swautele          #+#    #+#              #
-#    Updated: 2022/03/29 16:35:19 by swautele         ###   ########.fr        #
+#    Updated: 2022/03/29 17:36:58 by swautele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ $(NAME) : $(OBJECT)
 	$(CC) $(CFLAGS) $? -o $@
 
 test : $(NAME)
-	./$(NAME) 3 1000 10 5
+	./$(NAME) 3 1000 100 100
 
 save :
 	git commit -am autosave
