@@ -6,7 +6,7 @@
 #    By: swautele <swautele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 14:48:19 by swautele          #+#    #+#              #
-#    Updated: 2022/03/29 15:08:28 by swautele         ###   ########.fr        #
+#    Updated: 2022/03/29 16:35:19 by swautele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = philosophers
 FILES = src/philosophers.c \
 	src/param.c \
 	src/thread.c \
-	src/ft_atoi.c
+	src/ft_atoi.c \
+	src/routine.c
 CC = gcc
 CFLAGS = -Wextra -Werror -Wall 
 OBJECT = $(FILES:.c=.o)
@@ -34,7 +35,7 @@ $(NAME) : $(OBJECT)
 	$(CC) $(CFLAGS) $? -o $@
 
 test : $(NAME)
-	./$(NAME)
+	./$(NAME) 3 1000 10 5
 
 save :
 	git commit -am autosave
