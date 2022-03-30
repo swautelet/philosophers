@@ -6,7 +6,7 @@
 #    By: swautele <swautele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 14:48:19 by swautele          #+#    #+#              #
-#    Updated: 2022/03/30 17:46:35 by swautele         ###   ########.fr        #
+#    Updated: 2022/03/30 18:53:18 by swautele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(NAME) : $(OBJECT)
 	$(CC) $(CFLAGS) $? -o $@
 
 test : $(NAME)
-	./$(NAME) 4 110 50 50
+	./$(NAME) 200 410 200 200
 
 re : fclean all
 

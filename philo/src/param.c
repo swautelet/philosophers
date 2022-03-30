@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:23:55 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/30 13:42:16 by swautele         ###   ########.fr       */
+/*   Updated: 2022/03/30 17:53:19 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ t_param	*init_param(int argc, char **argv)
 		set->meal = ft_atoi(argv[5], &flagerr);
 	if (flagerr == -1)
 		set->number = -1;
-	// set.flagdeath = &argv[0][0];
-	// argv[0][0] = 0;
+	if (flagerr == -1)
+	{
+		free (set);
+		return (NULL);
+	}
 	return (set);
 }

@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/30 17:24:42 by swautele         ###   ########.fr       */
+/*   Updated: 2022/03/30 18:37:52 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int	create_thread(t_param *param)
 	param->speachrod = malloc(sizeof(pthread_mutex_t));
 	pthread_mutex_init(param->speachrod, NULL);
 	// printf("%p\n", param->speachrod);
+	gettimeofday(&param->start, NULL);
+	param->lastmeal = param->start;
+	param->lastmeal.tv_sec++;
 	while (++i < param->number)
 	{
 		*(info + i) = *param;
