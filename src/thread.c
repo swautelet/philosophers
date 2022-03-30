@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/29 17:35:46 by swautele         ###   ########.fr       */
+/*   Updated: 2022/03/30 13:21:52 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ int	create_thread(t_param param)
 			(info + i)->lfork = fork + param.number - 1;
 		(info + i)->rfork = fork + i;
 		pthread_mutex_init(fork + i, NULL);
-		pthread_create(philo + i, NULL, &philo_routine, info + i);
 	}
+	i = -1;
+	while (++i < param.number)
+		pthread_create(philo + i, NULL, &philo_routine, info + i);
 	i = -1;
 	while (++i < param.number)
 		pthread_join(*(philo + i), NULL);
