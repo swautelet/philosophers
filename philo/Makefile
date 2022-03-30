@@ -6,11 +6,11 @@
 #    By: swautele <swautele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 14:48:19 by swautele          #+#    #+#              #
-#    Updated: 2022/03/30 16:01:21 by swautele         ###   ########.fr        #
+#    Updated: 2022/03/30 16:10:39 by swautele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philosophers
+NAME = philo
 FILES = src/philosophers.c \
 	src/param.c \
 	src/thread.c \
@@ -24,10 +24,10 @@ OBJECT = $(FILES:.c=.o)
 all : $(NAME)
 
 clean :
-	rm $(OBJECT)
+	rm -f $(OBJECT)
 
 fclean : clean
-	rm $(NAME)
+	rm -f $(NAME)
 
 $(NAME) : $(OBJECT)
 	$(CC) $(CFLAGS) $(OBJECT) -o $(NAME)
