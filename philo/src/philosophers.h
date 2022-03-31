@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:12:43 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/30 13:55:50 by swautele         ###   ########.fr       */
+/*   Updated: 2022/03/31 14:52:52 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_param{
 	struct timeval	start;
 	struct timeval	lastmeal;
 	char			*flagdeath;
-	pthread_mutex_t	*speachrod;
+	// pthread_mutex_t	*speachrod;
 }	t_param;
 
 int		ft_atoi(const char *str, char *flagerr);

@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/30 18:37:52 by swautele         ###   ########.fr       */
+/*   Updated: 2022/03/31 14:52:56 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	create_thread(t_param *param)
 	fork = malloc(sizeof(pthread_mutex_t) * param->number);
 	philo = malloc(sizeof(pthread_t) * param->number);
 	info = malloc(sizeof(t_param) * param->number);
-	i = -1;
-	param->speachrod = malloc(sizeof(pthread_mutex_t));
-	pthread_mutex_init(param->speachrod, NULL);
+	// param->speachrod = malloc(sizeof(pthread_mutex_t));
+	// pthread_mutex_init(param->speachrod, NULL);
 	// printf("%p\n", param->speachrod);
 	gettimeofday(&param->start, NULL);
 	param->lastmeal = param->start;
 	param->lastmeal.tv_sec++;
+	i = -1;
 	while (++i < param->number)
 	{
 		*(info + i) = *param;
@@ -49,8 +49,8 @@ int	create_thread(t_param *param)
 	i = -1;
 	while (++i < param->number)
 		pthread_mutex_destroy(fork + i);
-	pthread_mutex_destroy(param->speachrod);
-	free (param->speachrod);
+	// pthread_mutex_destroy(param->speachrod);
+	// free (param->speachrod);
 	free (fork);
 	free (philo);
 	free (info);

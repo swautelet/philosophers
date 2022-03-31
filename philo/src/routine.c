@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/30 18:45:41 by swautele         ###   ########.fr       */
+/*   Updated: 2022/03/31 14:52:48 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*philo_routine(void *info)
 	while (time_since(data->start) < 1000)
 		data->number++;
 	if (data->pos %2 == 1)
-		my_sleep(9);
+		my_sleep(5);
 	while (time_since(data->lastmeal) < data->death && data->flagdeath[0] == 0)
 	{
 		pthread_mutex_lock(data->lfork);
@@ -38,13 +38,14 @@ void	*philo_routine(void *info)
 			printf("%zd	philo no %d is eating\n", time_since(data->start) - 1000, data->pos);
 		gettimeofday(&data->lastmeal, NULL);
 		// pthread_mutex_unlock(data->speachrod);
-		my_sleep(data->eat);
+		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
+			my_sleep(data->eat);
 		pthread_mutex_unlock(data->lfork);
 		pthread_mutex_unlock(data->rfork);
 		// pthread_mutex_lock(data->speachrod);
 		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 			printf("%zd	philo no %d is sleeping\n",time_since(data->start) - 1000, data->pos);
-		pthread_mutex_unlock(data->speachrod);
+		// pthread_mutex_unlock(data->speachrod);
 		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 			my_sleep(data->sleep);
 		// pthread_mutex_lock(data->speachrod);
