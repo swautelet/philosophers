@@ -6,16 +6,16 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/30 15:52:42 by swautele         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:27:53 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-ssize_t	time_since(struct timeval last)
+int	time_since(struct timeval last)
 {
 	struct timeval	now;
-	ssize_t			time;
+	int				time;
 
 	gettimeofday(&now, NULL);
 	if (now.tv_sec != last.tv_sec)
