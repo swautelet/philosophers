@@ -6,7 +6,7 @@
 /*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/04 01:12:02 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/04 01:28:19 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	my_sleep(int time)
 	while (time_since(now) < time)
 	{
 		// i++;
-		usleep(900);
+		usleep(500);
 	}
 }
