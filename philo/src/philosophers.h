@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:12:43 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/31 15:27:38 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/03 20:17:38 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_param{
 	struct timeval	start;
 	struct timeval	lastmeal;
 	char			*flagdeath;
-	// pthread_mutex_t	*speachrod;
+	pthread_mutex_t	*speachrod;
 }	t_param;
 
 int		ft_atoi(const char *str, char *flagerr);
@@ -40,6 +40,6 @@ int		create_thread(t_param *param);
 t_param	*init_param(int argc, char **argv);
 void	*philo_routine(void *info);
 int		time_since(struct timeval last);
-void	my_sleep(ssize_t time);
+void	my_sleep(int time);
 
 #endif

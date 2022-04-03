@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/31 15:27:53 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/03 20:19:23 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,17 @@ int	time_since(struct timeval last)
 	return (time);
 }
 
-void	my_sleep(ssize_t time)
+void	my_sleep(int time)
 {
 	int				i;
 	struct timeval	now;
 
 	i = 0;
 	gettimeofday(&now, NULL);
+	usleep(time * 990);
 	while (time_since(now) < time)
+	{
+		// usleep(900);
 		i++;
+	}
 }

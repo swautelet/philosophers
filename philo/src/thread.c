@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/31 15:19:03 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/03 20:11:40 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	create_thread(t_param *param)
 	fork = malloc(sizeof(pthread_mutex_t) * param->number);
 	philo = malloc(sizeof(pthread_t) * param->number);
 	info = malloc(sizeof(t_param) * param->number);
-	// param->speachrod = malloc(sizeof(pthread_mutex_t));
-	// pthread_mutex_init(param->speachrod, NULL);
+	param->speachrod = malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(param->speachrod, NULL);
 	// printf("%p\n", param->speachrod);
 	gettimeofday(&param->start, NULL);
 	param->lastmeal = param->start;
@@ -42,15 +42,20 @@ int	create_thread(t_param *param)
 	}
 	i = -1;
 	while (++i < param->number)
+	{
 		pthread_create(philo + i, NULL, &philo_routine, info + i);
+		// pthread_detach(*(philo + i));
+	}
 	i = -1;
 	while (++i < param->number)
 		pthread_join(*(philo + i), NULL);
+	// while (param->flagdeath[0] == 0)
+		// usleep(5000);
 	i = -1;
 	while (++i < param->number)
 		pthread_mutex_destroy(fork + i);
-	// pthread_mutex_destroy(param->speachrod);
-	// free (param->speachrod);
+	pthread_mutex_destroy(param->speachrod);
+	free (param->speachrod);
 	free (fork);
 	free (philo);
 	free (info);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: swautele <swautele@student.42.fr>          +#+  +:+       +#+         #
+#    By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 14:48:19 by swautele          #+#    #+#              #
-#    Updated: 2022/03/31 15:29:31 by swautele         ###   ########.fr        #
+#    Updated: 2022/04/03 20:16:11 by simonwautel      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(NAME) : $(OBJECT)
 	$(CC) $(CFLAGS) $? -o $@
 
 test : $(NAME)
-	./$(NAME) 20 200 60 60
+	./$(NAME) 200 410 200 200
 
 re : fclean all
 
