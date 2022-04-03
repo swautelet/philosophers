@@ -6,7 +6,7 @@
 /*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:12:43 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/03 20:17:38 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/03 22:54:34 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int		create_thread(t_param *param);
 t_param	*init_param(int argc, char **argv);
 void	*philo_routine(void *info);
 int		time_since(struct timeval last);
-void	my_sleep(int time);
+void	my_sleep(int time, struct timeval start);
 
 #endif

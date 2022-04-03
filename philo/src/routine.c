@@ -6,7 +6,7 @@
 /*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/03 20:08:00 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/03 23:05:33 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	*philo_routine(void *info)
 		gettimeofday(&data->lastmeal, NULL);
 		pthread_mutex_unlock(data->speachrod);
 		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-			my_sleep(data->eat);
+			my_sleep(data->eat, data->start);
 		pthread_mutex_unlock(data->lfork);
 		pthread_mutex_unlock(data->rfork);
 		pthread_mutex_lock(data->speachrod);
@@ -51,7 +51,7 @@ void	*philo_routine(void *info)
 			printf("%d	philo no %d is sleeping\n",time_since(data->start) - 1000, data->pos);
 		pthread_mutex_unlock(data->speachrod);
 		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-			my_sleep(data->sleep);
+			my_sleep(data->sleep, data->start);
 		pthread_mutex_lock(data->speachrod);
 		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 			printf("%d	philo no %d is thinking\n", time_since(data->start) - 1000, data->pos);
@@ -60,12 +60,12 @@ void	*philo_routine(void *info)
 	if (data->lfork == data->rfork)
 	{
 		pthread_mutex_unlock(data->lfork);
-		my_sleep(data->death);
+		my_sleep(data->death, data->start);
 	}
 	pthread_mutex_lock(data->speachrod);
-	if (data->flagdeath[0] == 0)
+	data->flagdeath[0]++;
+	if (data->flagdeath[0] == 1)
 	{
-		data->flagdeath[0] = 1;
 		printf("%d	philo no %d died\n", time_since(data->start) - 1000, data->pos);
 	}
 	pthread_mutex_unlock(data->speachrod);
