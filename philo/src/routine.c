@@ -6,7 +6,7 @@
 /*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/04 00:13:41 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/04 00:17:38 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*philo_routine(void *info)
 		while (time_since(data->start) < 1000 + (data->eat / 2))
 			usleep(1);
 	else if (data->pos % 2 == 1 && data->eat == 1)
-		while (time_since(data->start) < 1002)
+		while (time_since(data->start) < 1001)
 			usleep(1);
 	else
 		while (time_since(data->start) < 1000)
