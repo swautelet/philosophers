@@ -6,7 +6,7 @@
 /*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/04 00:17:38 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/04 00:33:28 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*philo_routine(void *info)
 		pthread_mutex_lock(data->lfork);
 		pthread_mutex_lock(data->speachrod);
 		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-			printf("%d	philo no %d has taken a fork\n", time_since(data->start) - 1000, data->pos);
+			printf("%d	philo n° %d has taken a fork\n", time_since(data->start) - 1000, data->pos);
 		pthread_mutex_unlock(data->speachrod);
 		if (data->lfork == data->rfork)
 			break ;
@@ -42,35 +42,35 @@ void	*philo_routine(void *info)
 			// printf("%zd	philo no %d has taken a fork\n", time_since(data->start) - 1000, data->pos);
 		pthread_mutex_lock(data->speachrod);
 		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-			printf("%d	philo no %d is eating\n", time_since(data->start) - 1000, data->pos);
+			printf("%d	philo n° %d is eating\n", time_since(data->start) - 1000, data->pos);
 		gettimeofday(&data->lastmeal, NULL);
 		pthread_mutex_unlock(data->speachrod);
 		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-			my_sleep(data->eat, data->start);
+			my_sleep(data->eat);
 		pthread_mutex_unlock(data->lfork);
 		pthread_mutex_unlock(data->rfork);
 		pthread_mutex_lock(data->speachrod);
 		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-			printf("%d	philo no %d is sleeping\n",time_since(data->start) - 1000, data->pos);
+			printf("%d	philo n° %d is sleeping\n",time_since(data->start) - 1000, data->pos);
 		pthread_mutex_unlock(data->speachrod);
 		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-			my_sleep(data->sleep, data->start);
+			my_sleep(data->sleep);
 		pthread_mutex_lock(data->speachrod);
 		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-			printf("%d	philo no %d is thinking\n", time_since(data->start) - 1000, data->pos);
+			printf("%d	philo n° %d is thinking\n", time_since(data->start) - 1000, data->pos);
 		pthread_mutex_unlock(data->speachrod);
 	}
 	if (data->lfork == data->rfork)
 	{
 		pthread_mutex_unlock(data->lfork);
 		pthread_mutex_unlock(data->speachrod);
-		my_sleep(data->death, data->start);
+		my_sleep(data->death);
 	}
 	pthread_mutex_lock(data->speachrod);
 	data->flagdeath[0]++;
 	if (data->flagdeath[0] == 1)
 	{
-		printf("%d	philo no %d died\n", time_since(data->start) - 1000, data->pos);
+		printf("%d	philo n° %d died\n", time_since(data->start) - 1000, data->pos);
 	}
 	pthread_mutex_unlock(data->speachrod);
 	return (NULL);
