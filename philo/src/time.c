@@ -6,7 +6,7 @@
 /*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/03 22:59:27 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/03 23:43:14 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,19 @@ void	my_sleep(int time, struct timeval start)
 	int				i;
 	int				j;
 	// struct timeval	now;
+	// (void)start;
 
 	// gettimeofday(&now, NULL);
 	j = time_since(start);
-	i = ((time * 1000) - 500);
+	if (time > 0)
+		i = ((time * 1000) - 2000);
+	else
+		i = 0;
 	if (i > 0)
 		usleep(i);
 	while (time_since(start) < j + time)
 	{
+		// i++;
 		usleep(1);
 	}
 }
