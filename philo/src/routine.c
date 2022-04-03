@@ -6,7 +6,7 @@
 /*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/04 00:33:28 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/04 01:50:59 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	*philo_routine(void *info)
 	// printf("%p\n", data->speachrod);
 	if (data->pos % 2 == 1)
 		while (time_since(data->start) < 1000 + (data->eat / 2))
-			usleep(1);
+			usleep(900);
 	else if (data->pos % 2 == 1 && data->eat == 1)
 		while (time_since(data->start) < 1001)
-			usleep(1);
+			usleep(900);
 	else
 		while (time_since(data->start) < 1000)
-			usleep(1);
+			usleep(900);
 	while (time_since(data->lastmeal) < data->death && data->flagdeath[0] == 0)
 	{
 		pthread_mutex_lock(data->lfork);
