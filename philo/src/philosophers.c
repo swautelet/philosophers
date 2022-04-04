@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:18:23 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/30 17:58:03 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/04 12:17:20 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

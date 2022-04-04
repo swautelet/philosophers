@@ -6,7 +6,7 @@
 /*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/03 20:11:40 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/04 12:18:57 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	create_thread(t_param *param)
 	{
 		*(info + i) = *param;
 		(info + i)->pos = i;
+		(info + i)->numeal = malloc(sizeof(int));
+		(info + i)->numeal[0] = param->meal;
 		if (i > 0)
 			(info + i)->lfork = fork + i - 1;
 		else

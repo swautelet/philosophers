@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:23:55 by swautele          #+#    #+#             */
-/*   Updated: 2022/03/30 17:53:19 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/04 12:17:09 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_param	*init_param(int argc, char **argv)
 	set->sleep = ft_atoi(argv[4], &flagerr);
 	if (argc == 6)
 		set->meal = ft_atoi(argv[5], &flagerr);
+	else
+		set->meal = -1;
 	if (flagerr == -1)
 		set->number = -1;
 	if (flagerr == -1)

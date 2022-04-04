@@ -6,7 +6,7 @@
 /*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/04 01:50:59 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/04 12:24:32 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*philo_routine(void *info)
 	else
 		while (time_since(data->start) < 1000)
 			usleep(900);
-	while (time_since(data->lastmeal) < data->death && data->flagdeath[0] == 0)
+	while (time_since(data->lastmeal) < data->death && data->flagdeath[0] == 0 && data->numeal[0] != 0)
 	{
 		pthread_mutex_lock(data->lfork);
 		pthread_mutex_lock(data->speachrod);
@@ -41,8 +41,12 @@ void	*philo_routine(void *info)
 		// if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 			// printf("%zd	philo no %d has taken a fork\n", time_since(data->start) - 1000, data->pos);
 		pthread_mutex_lock(data->speachrod);
-		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
+		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death && data->numeal[0] != 0)
+		{
+			if (data->numeal[0] > 0)
+				data->numeal[0]--;
 			printf("%d	philo n° %d is eating\n", time_since(data->start) - 1000, data->pos);
+		}
 		gettimeofday(&data->lastmeal, NULL);
 		pthread_mutex_unlock(data->speachrod);
 		if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
@@ -68,7 +72,7 @@ void	*philo_routine(void *info)
 	}
 	pthread_mutex_lock(data->speachrod);
 	data->flagdeath[0]++;
-	if (data->flagdeath[0] == 1)
+	if (data->flagdeath[0] == 1 && data->numeal[0] != 0)
 	{
 		printf("%d	philo n° %d died\n", time_since(data->start) - 1000, data->pos);
 	}
