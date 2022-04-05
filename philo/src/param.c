@@ -6,7 +6,7 @@
 /*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:23:55 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/04 12:17:09 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/05 10:37:14 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_param	*init_param(int argc, char **argv)
 	char	flagerr;
 
 	set = malloc(sizeof(t_param));
+	memset(set, 0, sizeof(t_param));
 	flagerr = 0;
 	set->number = ft_atoi(argv[1], &flagerr);
 	set->death = ft_atoi(argv[2], &flagerr);
@@ -27,8 +28,6 @@ t_param	*init_param(int argc, char **argv)
 		set->meal = ft_atoi(argv[5], &flagerr);
 	else
 		set->meal = -1;
-	if (flagerr == -1)
-		set->number = -1;
 	if (flagerr == -1)
 	{
 		free (set);
