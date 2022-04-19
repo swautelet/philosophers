@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
+/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:18:23 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/04 12:17:20 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/19 13:12:02 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	main(int argc, char **argv)
 		printf("Error\nParameter invalid\n");
 		return (2);
 	}
-	// gettimeofday(&param->start, NULL);
-	// param->lastmeal = param->start;
 	param->flagdeath = malloc(sizeof(char));
 	param->flagdeath[0] = 0;
 	create_thread(param);

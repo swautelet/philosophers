@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
+/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/04 01:49:54 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/19 14:05:19 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,25 @@ int	time_since(struct timeval last)
 		time -= last.tv_usec;
 	}
 	time = time / 1000;
-	// printf("now.tvsec = %zd	now.tvusec = %d		last.tvsec = %zd last.tvusec = %d\n", now.tv_sec, now.tv_usec, last.tv_sec, last.tv_usec);
 	return (time);
 }
 
 void	my_sleep(int time)
 {
-	// int				i;
-	// int				j;
 	struct timeval	now;
-	// (void)start;
 
 	gettimeofday(&now, NULL);
-	// j = time_since(start);
-	// if (time > 0)
-		// i = ((time * 1000) - 5000);
-	// else
-		// i = 0;
-	// if (i > 0)
-		// usleep(i);
 	while (time_since(now) < time)
-	{
-		// i++;
 		usleep(900);
+}
+
+void	philo_die(t_param	*data)
+{
+	pthread_mutex_lock(data->speachrod);
+	data->flagdeath[0]++;
+	if (data->flagdeath[0] == 1 && data->numeal[0] != 0)
+	{
+		printf("%d	philo n° %d died\n", time_since(data->start), data->pos);
 	}
+	pthread_mutex_unlock(data->speachrod);
 }
