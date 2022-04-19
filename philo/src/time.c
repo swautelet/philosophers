@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/19 14:46:31 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/19 16:45:29 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	my_sleep(int time)
 void	philo_die(t_param	*data)
 {
 	pthread_mutex_lock(data->speachrod);
-	data->flagdeath[0]++;
 	if (data->flagdeath[0] == 1 && data->numeal[0] != 0)
 	{
+		data->flagdeath[0]++;
 		printf("%d	philo n° %d died\n", time_since(data->start), data->pos);
 	}
 	pthread_mutex_unlock(data->speachrod);
