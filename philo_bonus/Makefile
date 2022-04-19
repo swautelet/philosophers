@@ -6,14 +6,14 @@
 #    By: swautele <swautele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 14:48:19 by swautele          #+#    #+#              #
-#    Updated: 2022/04/19 15:06:39 by swautele         ###   ########.fr        #
+#    Updated: 2022/04/19 15:48:52 by swautele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 FILES = src/philosophers.c \
 	src/param.c \
-	src/thread.c \
+	src/process.c \
 	src/ft_atoi.c \
 	src/routine.c \
 	src/time.c
