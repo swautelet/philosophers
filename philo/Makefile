@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+         #
+#    By: swautele <swautele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 14:48:19 by swautele          #+#    #+#              #
-#    Updated: 2022/04/04 12:26:44 by simonwautel      ###   ########.fr        #
+#    Updated: 2022/04/19 14:49:37 by swautele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
