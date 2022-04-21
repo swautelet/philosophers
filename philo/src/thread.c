@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 14:56:27 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:56:42 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,44 @@ static void	threadinator(pthread_t *philo, t_param *info, pthread_mutex_t *fork)
 		pthread_mutex_destroy(fork + i);
 }
 
+static int	philo_alloc(pthread_mutex_t **fork, pthread_t **philo,
+	t_param **info, t_param *param)
+{
+	*fork = malloc(sizeof(pthread_mutex_t) * param->number);
+	if (fork == NULL)
+		return (-1);
+	*philo = malloc(sizeof(pthread_t) * param->number);
+	if (philo == NULL)
+	{
+		free (fork);
+		return (-1);
+	}
+	*info = malloc(sizeof(t_param) * param->number);
+	if (info == NULL)
+	{
+		free (fork);
+		free (philo);
+		return (-1);
+	}
+	param->speachrod = malloc(sizeof(pthread_mutex_t));
+	if (param->speachrod == NULL)
+	{
+		free (fork);
+		free (philo);
+		free (info);
+		return (-1);
+	}
+	return (0);
+}
+
 int	create_thread(t_param *param)
 {
 	pthread_mutex_t	*fork;
 	pthread_t		*philo;
 	t_param			*info;
 
-	fork = malloc(sizeof(pthread_mutex_t) * param->number);
-	philo = malloc(sizeof(pthread_t) * param->number);
-	info = malloc(sizeof(t_param) * param->number);
-	param->speachrod = malloc(sizeof(pthread_mutex_t));
+	if (philo_alloc(&fork, &philo, &info, param) == -1)
+		return (-1);
 	pthread_mutex_init(param->speachrod, NULL);
 	gettimeofday(&param->start, NULL);
 	param->lastmeal = param->start;

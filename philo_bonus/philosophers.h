@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:12:43 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 16:16:55 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:43:49 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <semaphore.h>
 
 typedef struct s_param{
 	int				number;
@@ -27,8 +28,7 @@ typedef struct s_param{
 	int				sleep;
 	int				meal;
 	int				pos;
-	pthread_mutex_t	*lfork;
-	pthread_mutex_t	*rfork;
+	sem_t			*forks;
 	struct timeval	start;
 	struct timeval	lastmeal;
 	char			*flagdeath;
