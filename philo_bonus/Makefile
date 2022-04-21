@@ -6,7 +6,7 @@
 #    By: swautele <swautele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 14:48:19 by swautele          #+#    #+#              #
-#    Updated: 2022/04/19 15:48:52 by swautele         ###   ########.fr        #
+#    Updated: 2022/04/21 16:13:55 by swautele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,6 @@ all : $(NAME)
 
 clean :
 	rm -f $(OBJECT)
-
-bonus : all
 
 fclean : clean
 	rm -f $(NAME)
