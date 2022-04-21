@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 17:30:06 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:31:42 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,6 @@ void	*philo_routine(void *info)
 	{
 		if (r_to_lfork(data) == -1)
 			break ;
-		// if (data->pos % 2 == 0)
-		// {
-		// 	if (r_to_lfork(data) == -1)
-		// 		break ;
-		// }
-		// else
-		// 	if (l_to_rfork(data) == -1)
-		// 		break ;
 		if (data->lfork == data->rfork)
 			break ;
 		if (philo_eat(data) != 0)
