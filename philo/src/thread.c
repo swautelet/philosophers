@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 16:56:42 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:08:14 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	create_thread(t_param *param)
 	pthread_mutex_init(param->speachrod, NULL);
 	gettimeofday(&param->start, NULL);
 	param->lastmeal = param->start;
-	param->lastmeal.tv_sec++;
 	init_philo(param, info, fork);
 	threadinator(philo, info, fork);
 	free (param->speachrod);

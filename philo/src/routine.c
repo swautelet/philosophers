@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 16:36:18 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:30:06 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ static int	l_to_rfork(t_param	*data)
 
 static int	r_to_lfork(t_param	*data)
 {
+	if (data->pos % 2 == 1)
+		return (l_to_rfork(data));
+	if (data->eat > data->death)
+		return (-1);
 	pthread_mutex_lock(data->rfork);
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
@@ -102,11 +106,16 @@ void	*philo_routine(void *info)
 	while (time_since(data->lastmeal) < data->death && data->flagdeath[0] == 0
 		&& data->meal != 0)
 	{
-		if (data->pos % 2 == 0)
-			r_to_lfork(data);
-		else
-			if (l_to_rfork(data) == -1)
-				break ;
+		if (r_to_lfork(data) == -1)
+			break ;
+		// if (data->pos % 2 == 0)
+		// {
+		// 	if (r_to_lfork(data) == -1)
+		// 		break ;
+		// }
+		// else
+		// 	if (l_to_rfork(data) == -1)
+		// 		break ;
 		if (data->lfork == data->rfork)
 			break ;
 		if (philo_eat(data) != 0)
@@ -119,6 +128,8 @@ void	*philo_routine(void *info)
 		my_sleep(data->death, data);
 		pthread_mutex_unlock(data->lfork);
 	}
+	if (data->eat > data->death)
+		my_sleep(data->death, data);
 	philo_die(data);
 	return (NULL);
 }
