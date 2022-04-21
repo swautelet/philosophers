@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:12:43 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 14:54:56 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:01:51 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		create_thread(t_param *param);
 t_param	*init_param(int argc, char **argv);
 void	*philo_routine(void *info);
 int		time_since(struct timeval last);
-void	my_sleep(int time);
+int		my_sleep(int time, t_param *data);
 void	philo_die(t_param *data);
 
 #endif

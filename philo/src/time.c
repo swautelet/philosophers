@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 14:56:40 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:01:36 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,18 @@ int	time_since(struct timeval last)
 	return (time);
 }
 
-void	my_sleep(int time)
+int	my_sleep(int time, t_param *data)
 {
 	struct timeval	now;
 
 	gettimeofday(&now, NULL);
 	while (time_since(now) < time)
+	{
+		if (time_since(data->lastmeal) > data->death)
+			return (-1);
 		usleep(900);
+	}
+	return (0);
 }
 
 void	philo_die(t_param	*data)

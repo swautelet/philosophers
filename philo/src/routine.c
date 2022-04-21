@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 15:01:13 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:04:57 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,14 @@ static int	philo_eat(t_param	*data)
 	gettimeofday(&data->lastmeal, NULL);
 	pthread_mutex_unlock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-		my_sleep(data->eat);
+		if (my_sleep(data->eat, data) == -1)
+			check = -1;
 	pthread_mutex_unlock(data->lfork);
 	pthread_mutex_unlock(data->rfork);
 	return (check);
 }
 
-static void	philo_sleep(t_param	*data)
+static int	philo_sleep(t_param	*data)
 {
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
@@ -81,12 +82,14 @@ static void	philo_sleep(t_param	*data)
 			data->pos);
 	pthread_mutex_unlock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-		my_sleep(data->sleep);
+		if (my_sleep(data->sleep, data) == -1)
+			return (-1);
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	philo n° %d is thinking\n", time_since(data->start),
 			data->pos);
 	pthread_mutex_unlock(data->speachrod);
+	return (0);
 }
 
 void	*philo_routine(void *info)
@@ -103,13 +106,14 @@ void	*philo_routine(void *info)
 			r_to_lfork(data);
 		if (data->lfork == data->rfork)
 			break ;
-		if (philo_eat(data) == 1)
+		if (philo_eat(data) != 0)
 			break ;
-		philo_sleep(data);
+		if (philo_sleep(data) != 0)
+			break ;
 	}
 	if (data->lfork == data->rfork)
 	{
-		my_sleep(data->death);
+		my_sleep(data->death, data);
 		pthread_mutex_unlock(data->lfork);
 	}
 	philo_die(data);
