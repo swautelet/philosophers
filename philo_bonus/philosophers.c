@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:18:23 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/19 18:03:43 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:17:05 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 	if (param->flagdeath != NULL)
 	{
 		param->flagdeath[0] = 0;
-		create_thread(param);
+		create_process(param);
 		free(param->flagdeath);
 	}
 	free (param);

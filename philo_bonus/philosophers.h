@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:12:43 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 16:01:51 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:16:55 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_param{
 }	t_param;
 
 int		ft_atoi(const char *str, char *flagerr);
-int		create_thread(t_param *param);
+int		create_process(t_param *param);
 t_param	*init_param(int argc, char **argv);
 void	*philo_routine(void *info);
 int		time_since(struct timeval last);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 14:56:27 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:17:23 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	threadinator(pthread_t *philo, t_param *info, pthread_mutex_t *fork)
 		pthread_mutex_destroy(fork + i);
 }
 
-int	create_thread(t_param *param)
+int	create_process(t_param *param)
 {
 	pthread_mutex_t	*fork;
 	pthread_t		*philo;
