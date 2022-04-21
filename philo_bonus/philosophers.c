@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:18:23 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/19 13:12:02 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/19 18:04:41 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ int	main(int argc, char **argv)
 		return (2);
 	}
 	param->flagdeath = malloc(sizeof(char));
-	param->flagdeath[0] = 0;
-	create_thread(param);
-	free(param->flagdeath);
+	if (param->flagdeath != NULL)
+	{
+		param->flagdeath[0] = 0;
+		create_thread(param);
+		free(param->flagdeath);
+	}
 	free (param);
 }

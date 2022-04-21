@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:12:43 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/19 14:04:56 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:54:56 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_param{
 	int				sleep;
 	int				meal;
 	int				pos;
-	int				*numeal;
 	pthread_mutex_t	*lfork;
 	pthread_mutex_t	*rfork;
 	struct timeval	start;

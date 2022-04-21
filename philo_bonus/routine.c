@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/19 14:47:23 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:55:55 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ static void	philo_eat(t_param	*data)
 {
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death
-		&& data->numeal[0] != 0)
+		&& data->meal != 0)
 	{
-		if (data->numeal[0] > 0)
-			data->numeal[0]--;
+		if (data->meal > 0)
+			data->meal--;
 		printf("%d	philo n° %d is eating\n", time_since(data->start),
 			data->pos);
 	}

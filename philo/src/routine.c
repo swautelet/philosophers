@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/19 14:47:23 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:55:24 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,18 @@ static void	r_to_lfork(t_param	*data)
 	pthread_mutex_unlock(data->speachrod);
 }
 
-static void	philo_eat(t_param	*data)
+static int	philo_eat(t_param	*data)
 {
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death
-		&& data->numeal[0] != 0)
+		&& data->meal != 0)
 	{
-		if (data->numeal[0] > 0)
-			data->numeal[0]--;
+		if (data->meal > 0)
+			data->meal--;
 		printf("%d	philo n° %d is eating\n", time_since(data->start),
 			data->pos);
+		if (data->meal == 0)
+			return (1);
 	}
 	gettimeofday(&data->lastmeal, NULL);
 	pthread_mutex_unlock(data->speachrod);
@@ -65,6 +67,7 @@ static void	philo_eat(t_param	*data)
 		my_sleep(data->eat);
 	pthread_mutex_unlock(data->lfork);
 	pthread_mutex_unlock(data->rfork);
+	return (0);
 }
 
 static void	philo_sleep(t_param	*data)
@@ -89,7 +92,7 @@ void	*philo_routine(void *info)
 
 	data = (t_param *)info;
 	while (time_since(data->lastmeal) < data->death && data->flagdeath[0] == 0
-		&& data->numeal[0] != 0)
+		&& data->meal != 0)
 	{
 		if (data->pos % 2 == 0)
 			l_to_rfork(data);
@@ -97,7 +100,8 @@ void	*philo_routine(void *info)
 			r_to_lfork(data);
 		if (data->lfork == data->rfork)
 			break ;
-		philo_eat(data);
+		if (philo_eat(data) == 1)
+			break ;
 		philo_sleep(data);
 	}
 	if (data->lfork == data->rfork)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/19 14:16:42 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:55:38 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ static void	init_philo(t_param *param, t_param *info, pthread_mutex_t *fork)
 	{
 		*(info + i) = *param;
 		(info + i)->pos = i + 1;
-		(info + i)->numeal = malloc(sizeof(int));
-		(info + i)->numeal[0] = param->meal;
 		if (i > 0)
 			(info + i)->lfork = fork + i - 1;
 		else
