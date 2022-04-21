@@ -6,7 +6,7 @@
 /*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 20:45:00 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/21 20:58:18 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ static void	processinator(t_param *data)
 	}
 	i = -1;
 	while (++i < data->number)
-		wait(&i);
-	sem_close(data);
+		wait(&id);
+	sem_close(data->forks);
+	// sem_unlink("forks");
 }
 
 int	create_process(t_param *param)
@@ -63,11 +64,10 @@ int	create_process(t_param *param)
 		return (-1);
 	}
 	pthread_mutex_init(param->speachrod, NULL);
-	sem_open("forks", O_CREAT, O_RDWR, param->number);
+	param->forks = sem_open("forks", O_CREAT, O_RDWR, param->number);
 	gettimeofday(&param->start, NULL);
 	param->lastmeal = param->start;
-	param->lastmeal.tv_sec++;
-	init_philo(param, param, fork);
+	// init_philo(param, param, fork);
 	processinator(param);
 	free (param->speachrod);
 	free (param->forks);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 16:04:57 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 21:02:59 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static void	l_to_rfork(t_param	*data)
 {
-	pthread_mutex_lock(data->lfork);
+	sem_wait(data->forks);
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	philo n° %d has taken a fork\n",
 			time_since(data->start), data->pos);
 	pthread_mutex_unlock(data->speachrod);
-	if (data->lfork == data->rfork)
+	if (data->number == 1)
 		return ;
-	pthread_mutex_lock(data->rfork);
+	sem_wait(data->forks);
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	philo n° %d has taken a fork\n",
@@ -32,15 +32,15 @@ static void	l_to_rfork(t_param	*data)
 
 static void	r_to_lfork(t_param	*data)
 {
-	pthread_mutex_lock(data->rfork);
+	sem_wait(data->forks);
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	philo n° %d has taken a fork\n",
 			time_since(data->start), data->pos);
 	pthread_mutex_unlock(data->speachrod);
-	if (data->lfork == data->rfork)
+	if (data->number == 1)
 		return ;
-	pthread_mutex_lock(data->lfork);
+	sem_wait(data->forks);
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	philo n° %d has taken a fork\n",
@@ -69,8 +69,8 @@ static int	philo_eat(t_param	*data)
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 		if (my_sleep(data->eat, data) == -1)
 			check = -1;
-	pthread_mutex_unlock(data->lfork);
-	pthread_mutex_unlock(data->rfork);
+	sem_post(data->forks);
+	sem_post(data->forks);
 	return (check);
 }
 
@@ -104,17 +104,17 @@ void	*philo_routine(void *info)
 			l_to_rfork(data);
 		else
 			r_to_lfork(data);
-		if (data->lfork == data->rfork)
+		if (data->number == 1)
 			break ;
 		if (philo_eat(data) != 0)
 			break ;
 		if (philo_sleep(data) != 0)
 			break ;
 	}
-	if (data->lfork == data->rfork)
+	if (data->number == 1)
 	{
 		my_sleep(data->death, data);
-		pthread_mutex_unlock(data->lfork);
+		sem_post(data->forks);
 	}
 	philo_die(data);
 	return (NULL);
