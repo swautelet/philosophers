@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 17:07:38 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 20:45:00 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,25 @@
 // 	}
 // }
 
-static void	threadinator(pthread_t *philo, t_param *info, pthread_mutex_t *fork)
+static void	processinator(t_param *data)
 {
 	int	i;
+	int	id;
 
 	i = -1;
-	while (++i < info->number)
+	while (++i < data->number)
 	{
-		pthread_create(philo + i, NULL, &philo_routine, info + i);
+		id = fork();
+		if (id != 0)
+		{
+			philo_routine(data);
+			break ;
+		}
 	}
 	i = -1;
-	while (++i < info->number)
-		pthread_join(*(philo + i), NULL);
-	i = -1;
-	while (++i < info->number)
-		pthread_mutex_destroy(fork + i);
+	while (++i < data->number)
+		wait(&i);
+	sem_close(data);
 }
 
 int	create_process(t_param *param)
@@ -64,7 +68,7 @@ int	create_process(t_param *param)
 	param->lastmeal = param->start;
 	param->lastmeal.tv_sec++;
 	init_philo(param, param, fork);
-	threadinator(param, param, fork);
+	processinator(param);
 	free (param->speachrod);
 	free (param->forks);
 	return (0);
