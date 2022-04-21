@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 14:55:24 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:01:13 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ static void	r_to_lfork(t_param	*data)
 
 static int	philo_eat(t_param	*data)
 {
+	int	check;
+
+	check = 0;
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death
 		&& data->meal != 0)
@@ -59,7 +62,7 @@ static int	philo_eat(t_param	*data)
 		printf("%d	philo n° %d is eating\n", time_since(data->start),
 			data->pos);
 		if (data->meal == 0)
-			return (1);
+			check = 1;
 	}
 	gettimeofday(&data->lastmeal, NULL);
 	pthread_mutex_unlock(data->speachrod);
@@ -67,7 +70,7 @@ static int	philo_eat(t_param	*data)
 		my_sleep(data->eat);
 	pthread_mutex_unlock(data->lfork);
 	pthread_mutex_unlock(data->rfork);
-	return (0);
+	return (check);
 }
 
 static void	philo_sleep(t_param	*data)
