@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:12:43 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/22 14:27:34 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:01:39 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <semaphore.h>
+# include <signal.h>
 
 typedef struct s_param{
 	int				number;
@@ -41,6 +42,6 @@ t_param	*init_param(int argc, char **argv);
 void	*philo_routine(void *info);
 int		time_since(struct timeval last);
 int		my_sleep(int time, t_param *data);
-void	philo_die(t_param *data);
+int		philo_die(t_param *data);
 
 #endif

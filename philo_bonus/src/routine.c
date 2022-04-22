@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/22 14:40:57 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:01:17 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ void	*philo_routine(void *info)
 		my_sleep(data->death, data);
 		sem_post(data->forks);
 	}
-	philo_die(data);
+	exit(philo_die(data));
 	return (NULL);
 }
