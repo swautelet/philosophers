@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/22 13:07:28 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:23:02 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	processinator(t_param *data)
 	}
 	i = -1;
 	while (++i < data->number)
-		wait(&id);
+		waitpid(-1, &id, P_ALL);
 	if (sem_close(data->forks) == -1)
 		if (sem_unlink("forks") == -1)
 			usleep(1);
@@ -58,6 +58,8 @@ static void	processinator(t_param *data)
 
 int	create_process(t_param *param)
 {
+	// int	test;
+
 	param->forks = malloc(sizeof(sem_t));
 	if (param->forks == NULL)
 		return (-1);
@@ -69,6 +71,8 @@ int	create_process(t_param *param)
 	}
 	pthread_mutex_init(param->speachrod, NULL);
 	param->forks = sem_open("forks", O_CREAT, O_RDWR, param->number);
+	// sem_getvalue(param->forks, &test);
+	// printf("semvalue = %d", test);
 	gettimeofday(&param->start, NULL);
 	param->lastmeal = param->start;
 	// init_philo(param, param, fork);
