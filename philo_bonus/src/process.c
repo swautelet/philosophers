@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/22 18:38:17 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/22 18:48:30 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,30 @@
 // 		pthread_mutex_init(fork + i, NULL);
 // 	}
 // }
+static void	kill_child(int id[200], t_param *data)
+{
+	int	ret;
+	int	i;
+
+	ret = 0;
+	i = 200;
+	while (i >= 0 && ret >= 0)
+	{
+		i = waitpid(-1, &ret, WNOHANG);
+		if (i > 0)
+		{
+			i = -1;
+			// usleep(1000);
+			while (id[++i] != 0 && i <= 200)
+				kill(id[i], SIGINT);
+			sem_post(data->speachrod);
+		}
+	}
+}
 
 static void	processinator(t_param *data)
 {
 	int	i;
-	int	ret;
 	int	id[200];
 
 	memset(id, 0, sizeof(int) * 200);
@@ -48,19 +67,7 @@ static void	processinator(t_param *data)
 			exit (0);
 		}
 	}
-	ret = 0;
-	while (i >= 0)
-	{
-		i = waitpid(-1, &ret, WNOHANG);
-		if (i > 0)
-		{
-			i = -1;
-			usleep(1000);
-			while (id[++i] != 0)
-				kill(id[i], SIGINT);
-			sem_post(data->speachrod);
-		}
-	}	
+	kill_child(id, data);
 	sem_close(data->forks);
 	sem_close(data->speachrod);
 }
