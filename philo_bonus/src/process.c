@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/22 17:25:35 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/22 18:29:09 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,15 @@
 static void	processinator(t_param *data)
 {
 	int	i;
-	int	id;
 	int	ret;
+	int	id[200];
 
-	i = 0;
+	memset(id, 0, sizeof(int) * 200);
+	i = -1;
 	while (++i <= data->number)
 	{
-		id = fork();
-		if (id == 0)
+		id[i] = fork();
+		if (id[i] == 0)
 		{
 			data->pos = i;
 			philo_routine(data);
@@ -48,15 +49,19 @@ static void	processinator(t_param *data)
 		}
 	}
 	ret = 0;
-	while ((i = waitpid(-1, &ret, WNOHANG)) > 0)
+	while ((i = waitpid(-1, &ret, WNOHANG)) >= 0)
 	{
-        if (i > 0 && ret == 1)
+        if (i > 0)
 		{
-			kill(-id, SIGINT);
+			i = -1;
+			while(id[++i] != 0)
+				kill(id[i], SIGINT);
 			sem_post(data->speachrod);
 		}
-	}
-	usleep(1000000);
+	}	
+	// while (waitpid(-1, &ret, WNOHANG) != -1)
+		// usleep(1000);
+	// usleep(1000);
 	// printf("test\n");
 	sem_close(data->forks);
 	sem_close(data->speachrod);
