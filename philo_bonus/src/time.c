@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/22 18:38:01 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/22 23:40:55 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	philo_die(t_param	*data)
 		sem_wait(data->speachrod);
 		data->flagdeath[0]++;
 		printf("%d	%d died\n", time_since(data->start), data->pos);
-		return (1);
+		exit (1);
 	}
 	return (0);
 }

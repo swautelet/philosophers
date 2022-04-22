@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/22 18:48:30 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/22 23:47:34 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ static void	kill_child(int id[200], t_param *data)
 	i = 200;
 	while (i >= 0 && ret >= 0)
 	{
-		i = waitpid(-1, &ret, WNOHANG);
-		if (i > 0)
+		i = waitpid(0, &ret, 0);
+		// printf("ret = %d", ret);
+		if (WIFEXITED(ret) > 0)
 		{
 			i = -1;
 			// usleep(1000);
