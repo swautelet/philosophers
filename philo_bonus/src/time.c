@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/22 16:02:24 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/22 18:38:01 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ int	philo_die(t_param	*data)
 		printf("%d	%d died\n", time_since(data->start), data->pos);
 		return (1);
 	}
-	// sem_post(data->speachrod);
 	return (0);
 }
