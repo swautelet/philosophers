@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
+/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 20:58:18 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/22 13:07:28 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,24 @@ static void	processinator(t_param *data)
 	int	i;
 	int	id;
 
-	i = -1;
-	while (++i < data->number)
+	i = 0;
+	while (++i <= data->number)
 	{
 		id = fork();
 		if (id != 0)
 		{
+			data->pos = i;
 			philo_routine(data);
-			break ;
+			exit(0) ;
 		}
 	}
 	i = -1;
 	while (++i < data->number)
 		wait(&id);
-	sem_close(data->forks);
+	if (sem_close(data->forks) == -1)
+		if (sem_unlink("forks") == -1)
+			usleep(1);
+			// free (data->forks);
 	// sem_unlink("forks");
 }
 
@@ -69,7 +73,8 @@ int	create_process(t_param *param)
 	param->lastmeal = param->start;
 	// init_philo(param, param, fork);
 	processinator(param);
+	// printf("speachrod  = %p		forks = %p", param->speachrod, param->forks);
 	free (param->speachrod);
-	free (param->forks);
+	// free (param->forks);
 	return (0);
 }
