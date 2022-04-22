@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/21 17:10:02 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:41:02 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	philo_die(t_param	*data)
 		&& time_since(data->lastmeal) >= data->death)
 	{
 		data->flagdeath[0]++;
-		printf("%d	philo n° %d died\n", time_since(data->start), data->pos);
+		printf("%d	%d died\n", time_since(data->start), data->pos);
 	}
 	pthread_mutex_unlock(data->speachrod);
 }

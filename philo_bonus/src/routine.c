@@ -6,36 +6,18 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/22 14:29:51 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:40:57 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"philosophers.h"
-
-// static void	l_to_rfork(t_param	*data)
-// {
-// 	sem_wait(data->forks);
-// 	pthread_mutex_lock(data->speachrod);
-// 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-// 		printf("%d	philo n° %d has taken a fork\n",
-// 			time_since(data->start), data->pos);
-// 	pthread_mutex_unlock(data->speachrod);
-// 	if (data->number == 1)
-// 		return ;
-// 	sem_wait(data->forks);
-// 	pthread_mutex_lock(data->speachrod);
-// 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-// 		printf("%d	philo n° %d has taken a fork\n",
-// 			time_since(data->start), data->pos);
-// 	pthread_mutex_unlock(data->speachrod);
-// }
 
 static void	take_fork(t_param	*data)
 {
 	sem_wait(data->forks);
 	sem_wait(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-		printf("%d	philo n° %d has taken a fork\n",
+		printf("%d	%d has taken a fork\n",
 			time_since(data->start), data->pos);
 	sem_post(data->speachrod);
 	if (data->number == 1)
@@ -43,7 +25,7 @@ static void	take_fork(t_param	*data)
 	sem_wait(data->forks);
 	sem_wait(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-		printf("%d	philo n° %d has taken a fork\n",
+		printf("%d	%d has taken a fork\n",
 			time_since(data->start), data->pos);
 	sem_post(data->speachrod);
 }
@@ -59,7 +41,7 @@ static int	philo_eat(t_param	*data)
 	{
 		if (data->meal > 0)
 			data->meal--;
-		printf("%d	philo n° %d is eating\n", time_since(data->start),
+		printf("%d	%d is eating\n", time_since(data->start),
 			data->pos);
 		if (data->meal == 0)
 			check = 1;
@@ -78,7 +60,7 @@ static int	philo_sleep(t_param	*data)
 {
 	sem_wait(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-		printf("%d	philo n° %d is sleeping\n", time_since(data->start),
+		printf("%d	%d is sleeping\n", time_since(data->start),
 			data->pos);
 	sem_post(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
@@ -86,7 +68,7 @@ static int	philo_sleep(t_param	*data)
 			return (-1);
 	sem_wait(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-		printf("%d	philo n° %d is thinking\n", time_since(data->start),
+		printf("%d	%d is thinking\n", time_since(data->start),
 			data->pos);
 	sem_post(data->speachrod);
 	return (0);

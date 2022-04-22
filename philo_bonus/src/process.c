@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/22 14:32:25 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:37:43 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static void	processinator(t_param *data)
 	}
 	i = 0;
 	while (waitpid(-1, NULL, WNOHANG) > 0)
-        usleep(1000);
+        usleep(1000000);
+	usleep(10000000);
 	sem_close(data->forks);
 	sem_close(data->speachrod);
 	// sem_unlink("/forks");
