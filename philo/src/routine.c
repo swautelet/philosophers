@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
+/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/23 14:46:02 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/23 15:49:56 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	l_to_rfork(t_param	*data)
 {
-	usleep(data->eat / 2);
+	// usleep(data->eat / 2 * 1000);
 	pthread_mutex_lock(data->lfork);
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
@@ -105,6 +105,8 @@ void	*philo_routine(void *info)
 	t_param	*data;
 
 	data = (t_param *)info;
+	if (data->pos % 2 == 1)
+		usleep(data->eat / 2 * 1000);
 	while (time_since(data->lastmeal) < data->death && data->flagdeath[0] == 0
 		&& data->meal != 0)
 	{
