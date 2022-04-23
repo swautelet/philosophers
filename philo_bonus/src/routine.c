@@ -6,14 +6,16 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/23 14:00:02 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/23 14:17:08 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"philosophers.h"
 
-static void	take_fork(t_param	*data)
+static int	take_fork(t_param	*data)
 {
+	if (data->eat >= data->death && data->pos % 2 == 1)
+		return (-1);
 	sem_wait(data->forks);
 	sem_wait(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
@@ -21,13 +23,14 @@ static void	take_fork(t_param	*data)
 			time_since(data->start), data->pos);
 	sem_post(data->speachrod);
 	if (data->number == 1)
-		return ;
+		return (-1);
 	sem_wait(data->forks);
 	sem_wait(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	%d has taken a fork\n",
 			time_since(data->start), data->pos);
 	sem_post(data->speachrod);
+	return (0);
 }
 
 static int	philo_eat(t_param	*data)
@@ -83,7 +86,8 @@ void	*philo_routine(void *info)
 	while (time_since(data->lastmeal) < data->death && data->flagdeath[0] == 0
 		&& data->meal != 0)
 	{
-		take_fork(data);
+		if (take_fork(data) == -1)
+			break ;
 		if (data->number == 1)
 			break ;
 		if (philo_eat(data) != 0)
@@ -96,6 +100,8 @@ void	*philo_routine(void *info)
 		my_sleep(data->death, data);
 		sem_post(data->forks);
 	}
+	if (data->eat >= data->death)
+		my_sleep(data->death, data);
 	philo_die(data);
 	return (NULL);
 }
