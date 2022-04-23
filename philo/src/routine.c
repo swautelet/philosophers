@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/23 14:12:59 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/23 14:18:52 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static int	r_to_lfork(t_param	*data)
 	if (data->eat >= data->death)
 		return (-1);
 	pthread_mutex_lock(data->rfork);
-	printf("test\n");
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	%d has taken a fork\n",
