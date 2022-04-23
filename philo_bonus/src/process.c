@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
+/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/22 23:47:34 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/23 13:26:29 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,32 @@
 // }
 static void	kill_child(int id[200], t_param *data)
 {
+	(void)id;
 	int	ret;
 	int	i;
+	int	j;
 
 	ret = 0;
 	i = 200;
-	while (i >= 0 && ret >= 0)
+	while (i >= 0)
 	{
 		i = waitpid(0, &ret, 0);
-		// printf("ret = %d", ret);
-		if (WIFEXITED(ret) > 0)
+		// j = WEXITSTATUS(ret);
+		// printf("i = %d		ret = %d\n", i, WEXITSTATUS(ret));
+		if (WEXITSTATUS(ret) == 1)
 		{
-			i = -1;
+			// printf("data->number = %d\n", data->number);
+			j = -1;
 			// usleep(1000);
-			while (id[++i] != 0 && i <= 200)
-				kill(id[i], SIGINT);
+			while (++j < data->number)
+			{
+				// printf("kill id %d\n", id[j]);
+				kill(id[j], SIGINT);
+			}
 			sem_post(data->speachrod);
 		}
 	}
+	// printf("test\n");
 }
 
 static void	processinator(t_param *data)
@@ -57,11 +65,11 @@ static void	processinator(t_param *data)
 	int	id[200];
 
 	memset(id, 0, sizeof(int) * 200);
-	i = -1;
+	i = 0;
 	while (++i <= data->number)
 	{
-		id[i] = fork();
-		if (id[i] == 0)
+		id[i - 1] = fork();
+		if (id[i - 1] == 0)
 		{
 			data->pos = i;
 			philo_routine(data);
