@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/23 15:49:56 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/23 15:55:28 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,6 @@ void	*philo_routine(void *info)
 		my_sleep(data->death, data);
 		pthread_mutex_unlock(data->lfork);
 	}
-	if (data->eat >= data->death)
-		my_sleep(data->death, data);
 	philo_die(data);
 	return (NULL);
 }
