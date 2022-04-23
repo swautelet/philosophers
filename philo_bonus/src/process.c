@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/23 13:27:32 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:39:52 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,16 @@ static void	kill_child(int id[200], t_param *data)
 static void	processinator(t_param *data)
 {
 	int	i;
-	int	id[200];
+	int	*id;
 
-	memset(id, 0, sizeof(int) * 200);
+	id = malloc(sizeof(int) * data->number);
+	if (id == NULL)
+	{
+		sem_close(data->forks);
+		sem_close(data->speachrod);
+		return ;
+	}
+	memset(id, 0, sizeof(int) * data->number);
 	i = 0;
 	while (++i <= data->number)
 	{
