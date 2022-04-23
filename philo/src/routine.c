@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/23 15:55:28 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/23 15:55:47 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	l_to_rfork(t_param	*data)
 {
-	// usleep(data->eat / 2 * 1000);
 	pthread_mutex_lock(data->lfork);
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
