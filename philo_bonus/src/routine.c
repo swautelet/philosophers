@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/23 13:23:28 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:27:44 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static void	take_fork(t_param	*data)
 {
-	// printf("test\n");
-	// if (data->pos %2 == 0)
-		// my_sleep(data->eat / 2, data);
 	sem_wait(data->forks);
 	sem_wait(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
