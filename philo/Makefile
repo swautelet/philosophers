@@ -6,7 +6,7 @@
 #    By: swautele <swautele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 14:48:19 by swautele          #+#    #+#              #
-#    Updated: 2022/04/19 14:49:37 by swautele         ###   ########.fr        #
+#    Updated: 2022/04/24 18:05:14 by swautele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,9 @@ test : re
 	./$(NAME) 200 130 60 60 20
 
 re : fclean all
+
+bonus :
+	make -C ../philo_bonus
 
 save :
 	git commit -am autosave
