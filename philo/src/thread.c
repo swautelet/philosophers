@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/26 16:33:31 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:34:39 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ static void	threadinator(pthread_t *philo, t_param *info, pthread_mutex_t *fork)
 
 	i = -1;
 	while (++i < info->number)
-	{
 		pthread_create(philo + i, NULL, &philo_routine, info + i);
-	}
 	i = -1;
 	while (++i < info->number)
 	{
