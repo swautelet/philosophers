@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/26 16:17:18 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:39:40 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	l_to_rfork(t_param	*data)
 {
 	pthread_mutex_lock(data->lfork);
 	pthread_mutex_lock(data->speachrod);
-	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
+	if (data->flagdeath[0] <= 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	%d has taken a fork\n",
 			time_since(data->start), data->pos);
 	pthread_mutex_unlock(data->speachrod);
@@ -24,7 +24,7 @@ static int	l_to_rfork(t_param	*data)
 		return (-1);
 	pthread_mutex_lock(data->rfork);
 	pthread_mutex_lock(data->speachrod);
-	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
+	if (data->flagdeath[0] <= 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	%d has taken a fork\n",
 			time_since(data->start), data->pos);
 	pthread_mutex_unlock(data->speachrod);
@@ -39,7 +39,7 @@ static int	r_to_lfork(t_param	*data)
 		return (-1);
 	pthread_mutex_lock(data->rfork);
 	pthread_mutex_lock(data->speachrod);
-	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
+	if (data->flagdeath[0] <= 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	%d has taken a fork\n",
 			time_since(data->start), data->pos);
 	pthread_mutex_unlock(data->speachrod);
@@ -47,7 +47,7 @@ static int	r_to_lfork(t_param	*data)
 		return (-1);
 	pthread_mutex_lock(data->lfork);
 	pthread_mutex_lock(data->speachrod);
-	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
+	if (data->flagdeath[0] <= 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	%d has taken a fork\n",
 			time_since(data->start), data->pos);
 	pthread_mutex_unlock(data->speachrod);
@@ -60,7 +60,7 @@ static int	philo_eat(t_param	*data)
 
 	check = 0;
 	pthread_mutex_lock(data->speachrod);
-	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death
+	if (data->flagdeath[0] <= 0 && time_since(data->lastmeal) < data->death
 		&& data->meal != 0)
 	{
 		if (data->meal > 0)
@@ -84,14 +84,14 @@ static int	philo_eat(t_param	*data)
 static int	philo_sleep(t_param	*data)
 {
 	pthread_mutex_lock(data->speachrod);
-	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
+	if (data->flagdeath[0] <= 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	%d is sleeping\n", time_since(data->start),
 			data->pos);
 	pthread_mutex_unlock(data->speachrod);
 	if (my_sleep(data->sleep, data) == -1)
 		return (-1);
 	pthread_mutex_lock(data->speachrod);
-	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
+	if (data->flagdeath[0] <= 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	%d is thinking\n", time_since(data->start),
 			data->pos);
 	else

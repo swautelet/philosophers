@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:37:00 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/26 16:34:39 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:46:21 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,7 @@ static void	threadinator(pthread_t *philo, t_param *info, pthread_mutex_t *fork)
 	i = -1;
 	while (++i < info->number)
 		pthread_create(philo + i, NULL, &philo_routine, info + i);
-	i = -1;
-	while (++i < info->number)
-	{
-		if (time_since((info + i)->lastmeal) > info->death)
-		{
-			pthread_mutex_lock(info->speachrod);
-			info->flagdeath[0]++;
-			printf("%d	%d died\n", time_since(info->start), i);
-			pthread_mutex_unlock(info->speachrod);
-			break ;
-		}
-		if (i == info->number - 1)
-			i = -1;
-	}
+	check_death(info);
 	i = -1;
 	while (++i < info->number)
 		pthread_join(*(philo + i), NULL);
