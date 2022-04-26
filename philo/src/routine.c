@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/26 15:52:30 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:17:18 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,13 @@ static int	philo_eat(t_param	*data)
 			data->pos);
 		if (data->meal == 0)
 			check = 1;
+		gettimeofday(&data->lastmeal, NULL);
 	}
 	else
 		check = -1;
 	pthread_mutex_unlock(data->speachrod);
 	if (my_sleep(data->eat, data) == -1)
 		check = -1;
-	if (check != -1)
-		gettimeofday(&data->lastmeal, NULL);
 	pthread_mutex_unlock(data->rfork);
 	pthread_mutex_unlock(data->lfork);
 	return (check);
