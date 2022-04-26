@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+         #
+#    By: swautele <swautele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 14:48:19 by swautele          #+#    #+#              #
-#    Updated: 2022/04/26 13:07:06 by simonwautel      ###   ########.fr        #
+#    Updated: 2022/04/26 15:47:07 by swautele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,9 @@ FILES = src/philosophers.c \
 	src/routine.c \
 	src/time.c
 CC = gcc
-CFLAGS = -Wextra -Werror -Wall -g -fsanitize=thread
+CFLAGS = -Wextra -Werror -Wall
 OBJECT = $(FILES:.c=.o)
+DFLAGS = -g -fsanitize=thread
 
 all : $(NAME)
 
@@ -35,8 +36,9 @@ $(NAME) : $(OBJECT)
 .o : .c
 	$(CC) $(CFLAGS) $? -o $@
 
-test : re
-	./$(NAME) 200 130 60 60 20
+test :
+	$(CC) $(CFLAGS) $(DFLAGS) $(FILES) -o $(NAME)
+	./$(NAME) 200 410 200 200 20 && ./$(NAME) 5 610 200 200 10 && ./$(NAME) 4 310 200 100 10
 
 re : fclean all
 

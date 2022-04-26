@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
+/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/26 13:19:35 by simonwautel      ###   ########.fr       */
+/*   Updated: 2022/04/26 15:52:30 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static int	philo_eat(t_param	*data)
 		if (data->meal == 0)
 			check = 1;
 	}
+	else
+		check = -1;
 	pthread_mutex_unlock(data->speachrod);
 	if (my_sleep(data->eat, data) == -1)
 		check = -1;
@@ -93,6 +95,11 @@ static int	philo_sleep(t_param	*data)
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	%d is thinking\n", time_since(data->start),
 			data->pos);
+	else
+	{
+		pthread_mutex_unlock(data->speachrod);
+		return (-1);
+	}
 	pthread_mutex_unlock(data->speachrod);
 	return (0);
 }
@@ -103,9 +110,8 @@ void	*philo_routine(void *info)
 
 	data = (t_param *)info;
 	if (data->pos % 2 == 1)
-		usleep(data->eat / 2 * 1000);
-	while (time_since(data->lastmeal) < data->death && data->flagdeath[0] == 0
-		&& data->meal != 0)
+		usleep((data->eat / 3 * 2) * 1000);
+	while (time_since(data->lastmeal) < data->death && data->meal != 0)
 	{
 		if (r_to_lfork(data) == -1)
 			break ;
