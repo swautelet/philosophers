@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:12:43 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/26 16:45:55 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:59:24 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	*philo_routine(void *info);
 int		time_since(struct timeval last);
 int		my_sleep(int time, t_param *data);
 void	philo_die(t_param *data);
-void	check_death(t_param	*info);
+int		check_death(t_param	*info);
 
 #endif
