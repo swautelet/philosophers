@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/23 15:55:23 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/26 13:12:03 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int	my_sleep(int time, t_param *data)
 void	philo_die(t_param	*data)
 {
 	if (data->eat >= data->death)
-		my_sleep(data->death, data);
+		my_sleep(data->death + 1, data);
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && data->meal != 0
-		&& time_since(data->lastmeal) >= data->death)
+		&& time_since(data->lastmeal) > data->death)
 	{
 		data->flagdeath[0]++;
 		printf("%d	%d died\n", time_since(data->start), data->pos);

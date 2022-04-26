@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: swautele <swautele@student.42.fr>          +#+  +:+       +#+         #
+#    By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 14:48:19 by swautele          #+#    #+#              #
-#    Updated: 2022/04/24 18:05:14 by swautele         ###   ########.fr        #
+#    Updated: 2022/04/26 13:07:06 by simonwautel      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FILES = src/philosophers.c \
 	src/routine.c \
 	src/time.c
 CC = gcc
-CFLAGS = -Wextra -Werror -Wall 
+CFLAGS = -Wextra -Werror -Wall -g -fsanitize=thread
 OBJECT = $(FILES:.c=.o)
 
 all : $(NAME)

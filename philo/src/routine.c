@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simonwautelet <simonwautelet@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/23 15:55:47 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/26 13:19:35 by simonwautel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,8 @@ static int	philo_eat(t_param	*data)
 			check = 1;
 	}
 	pthread_mutex_unlock(data->speachrod);
-	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-		if (my_sleep(data->eat, data) == -1)
-			check = -1;
+	if (my_sleep(data->eat, data) == -1)
+		check = -1;
 	if (check != -1)
 		gettimeofday(&data->lastmeal, NULL);
 	pthread_mutex_unlock(data->rfork);
@@ -88,9 +87,8 @@ static int	philo_sleep(t_param	*data)
 		printf("%d	%d is sleeping\n", time_since(data->start),
 			data->pos);
 	pthread_mutex_unlock(data->speachrod);
-	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
-		if (my_sleep(data->sleep, data) == -1)
-			return (-1);
+	if (my_sleep(data->sleep, data) == -1)
+		return (-1);
 	pthread_mutex_lock(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 		printf("%d	%d is thinking\n", time_since(data->start),
@@ -121,7 +119,7 @@ void	*philo_routine(void *info)
 	}
 	if (data->lfork == data->rfork)
 	{
-		my_sleep(data->death, data);
+		my_sleep(data->death + 1, data);
 		pthread_mutex_unlock(data->lfork);
 	}
 	philo_die(data);
