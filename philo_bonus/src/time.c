@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/27 14:39:35 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/27 15:08:10 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ int	my_sleep(int time, t_param *data)
 
 int	philo_die(t_param	*data)
 {
+	if (data->number == 1)
+	{
+		my_sleep(data->death, data);
+		sem_post(data->forks);
+	}
+	if (data->eat >= data->death)
+		my_sleep(data->death, data);
 	if (data->flagdeath[0] == 0 && data->meal != 0
 		&& time_since(data->lastmeal) > data->death)
 	{

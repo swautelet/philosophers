@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/27 15:07:13 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/27 15:08:13 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static int	take_fork(t_param	*data)
 {
 	if ((data->eat >= data->death && data->pos % 2 == 1))
 		return (-1);
-	if (data->death - time_since(data->lastmeal) < data->eat && data->eat * 2 > data->death)
+	if (data->death - time_since(data->lastmeal) < data->eat && data->eat * 2
+		> data->death)
 	{
 		while (my_sleep(1, data) != -1)
 			;
@@ -102,13 +103,6 @@ void	*philo_routine(void *info)
 		if (philo_sleep(data) != 0)
 			break ;
 	}
-	if (data->number == 1)
-	{
-		my_sleep(data->death, data);
-		sem_post(data->forks);
-	}
-	if (data->eat >= data->death)
-		my_sleep(data->death, data);
 	philo_die(data);
 	return (NULL);
 }
