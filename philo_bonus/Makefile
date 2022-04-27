@@ -6,7 +6,7 @@
 #    By: swautele <swautele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 14:48:19 by swautele          #+#    #+#              #
-#    Updated: 2022/04/26 16:48:36 by swautele         ###   ########.fr        #
+#    Updated: 2022/04/27 14:20:29 by swautele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FILES = src/philosophers.c \
 	src/routine.c \
 	src/time.c
 CC = gcc
-CFLAGS = -Wextra -Werror -Wall 
+CFLAGS = -Wextra -Werror -Wall
 OBJECT = $(FILES:.c=.o)
 
 all : $(NAME)

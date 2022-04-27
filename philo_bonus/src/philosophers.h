@@ -6,12 +6,15 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:12:43 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/22 16:01:39 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/27 14:27:49 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
+
+
+# define D printf("< %d:%s %s() [%d] >\n", __LINE__, __FILE__, __FUNCTION__, data->meal);
 
 # include <pthread.h>
 # include <sys/time.h>
