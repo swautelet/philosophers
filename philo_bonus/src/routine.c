@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/27 14:41:01 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/27 14:42:16 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int	take_fork(t_param	*data)
 		return (-1);
 	if (data->death - time_since(data->lastmeal) < data->eat)
 	{
-		while (1)
-			if (my_sleep(1, data) == -1)
-				return (-1);
+		while (my_sleep(1, data) != -1)
+			;
+		return (-1);
 	}
 	sem_wait(data->forks);
 	sem_wait(data->speachrod);
