@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/23 14:17:08 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:16:10 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,11 @@ static int	philo_eat(t_param	*data)
 		if (data->meal == 0)
 			check = 1;
 	}
+	gettimeofday(&data->lastmeal, NULL);
 	sem_post(data->speachrod);
 	if (data->flagdeath[0] == 0 && time_since(data->lastmeal) < data->death)
 		if (my_sleep(data->eat, data) == -1)
 			check = -1;
-	if (check != -1)
-		gettimeofday(&data->lastmeal, NULL);
 	sem_post(data->forks);
 	sem_post(data->forks);
 	return (check);
