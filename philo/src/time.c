@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/30 14:27:01 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/30 14:37:55 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	time_since(struct timeval last)
 {
 	struct timeval	now;
-	int				time;
+	size_t			time;
 
 	gettimeofday(&now, NULL);
 	if (now.tv_sec != last.tv_sec)
@@ -30,7 +30,7 @@ int	time_since(struct timeval last)
 		time -= last.tv_usec;
 	}
 	time = time / 1000;
-	return (time);
+	return ((int)time);
 }
 
 int	my_sleep(int time, t_param *data)
