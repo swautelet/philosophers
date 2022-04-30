@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/30 14:37:55 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/30 14:53:48 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,10 @@ int	check_death(t_param	*info)
 	int	i;
 
 	i = -1;
-	while (++i < info->number && info->flagdeath[0] <= 0)
+	pthread_mutex_lock(info->speachrod);
+	while (++i < info->number && info->flagdeath[0] <= 0
+		&& info->flagdeath[0] != -(info->number))
 	{
-		pthread_mutex_lock(info->speachrod);
 		if (info->flagdeath[0] == -(info->number))
 			return (2);
 		else if (time_since((info + i)->lastmeal) > info->death
@@ -84,6 +85,9 @@ int	check_death(t_param	*info)
 		pthread_mutex_unlock(info->speachrod);
 		if (i == info->number - 1)
 			i = -1;
+		usleep(100);
+		pthread_mutex_lock(info->speachrod);
 	}
+	pthread_mutex_unlock(info->speachrod);
 	return (0);
 }
