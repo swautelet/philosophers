@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/30 14:43:55 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/30 14:59:05 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	*philo_routine(void *info)
 	t_param	*data;
 
 	data = (t_param *)info;
-	if (data->pos % 2 == 1)
+	if (data->pos % 2 == 0)
 		usleep((data->eat / 3 * 2) * 1000);
 	while (time_since(data->lastmeal) < data->death && data->meal != 0)
 	{
