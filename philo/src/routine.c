@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/26 16:39:40 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/30 14:08:27 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ void	*philo_routine(void *info)
 			break ;
 		if (philo_sleep(data) != 0)
 			break ;
-		usleep(500);
 	}
 	if (data->lfork == data->rfork)
 	{

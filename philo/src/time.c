@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:05:47 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/27 13:23:37 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/30 14:14:06 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	philo_die(t_param	*data)
 	if (data->flagdeath[0] <= 0 && data->meal != 0
 		&& time_since(data->lastmeal) > data->death)
 	{
-		data->flagdeath[0] = 1;
+		data->flagdeath[0] = 10;
 		printf("%d	%d died\n", time_since(data->start), data->pos);
 	}
-	else if (data->meal == 0)
+	else if (data->meal == 0 && data->flagdeath[0] <= 0)
 		data->flagdeath[0]--;
 	pthread_mutex_unlock(data->speachrod);
 }
@@ -68,12 +68,13 @@ int	check_death(t_param	*info)
 	int	i;
 
 	i = -1;
-	while (++i < info->number)
+	while (++i < info->number && info->flagdeath[0] <= 0)
 	{
 		pthread_mutex_lock(info->speachrod);
-		if (time_since((info + i)->lastmeal) > info->death)
+		if (time_since((info + i)->lastmeal) > info->death
+			&& info->flagdeath[0] <= 0)
 		{
-			info->flagdeath[0] = 1;
+			info->flagdeath[0] = 10;
 			printf("%d	%d died\n", time_since(info->start), i);
 			pthread_mutex_unlock(info->speachrod);
 			return (1);
