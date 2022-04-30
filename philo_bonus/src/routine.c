@@ -6,7 +6,7 @@
 /*   By: swautele <swautele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:26:13 by swautele          #+#    #+#             */
-/*   Updated: 2022/04/27 15:08:13 by swautele         ###   ########.fr       */
+/*   Updated: 2022/04/30 15:09:02 by swautele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,9 @@ void	*philo_routine(void *info)
 		if (philo_sleep(data) != 0)
 			break ;
 	}
+	if (data->number == 1)
+		while (my_sleep(1, data) != -1)
+			;
 	philo_die(data);
 	return (NULL);
 }
