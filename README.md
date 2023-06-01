@@ -3,7 +3,7 @@
 ## Usage (mac only) -- 👈
 
 ```bash
-git clone https://github.com/swautelet/philosophers.git && cd philosophers && make && ./philosophers 10 450 200 200 10
+git clone https://github.com/swautelet/philosophers.git && cd philosophers/philo && make && ./philosophers 10 450 200 200 10
 ```
 
 ## Topics -- 🗝
